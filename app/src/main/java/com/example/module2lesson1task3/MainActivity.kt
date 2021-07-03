@@ -24,10 +24,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val r=5.0;
+        val l=6.0;
         val circle1= Circle(r)
+        val suare1= Square(l)
         Log.d("mylog","Hello Kotlin!")
       
         Log.d("mylog","circle1 area="+circle1.calcArea().toString())
+        Log.d("mylog","suare1 area="+suare1.calcArea().toString())
 
     }
 }
