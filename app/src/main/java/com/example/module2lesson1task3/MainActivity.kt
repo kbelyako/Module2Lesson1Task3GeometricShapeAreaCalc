@@ -27,10 +27,13 @@ class MainActivity : AppCompatActivity() {
         val l=6.0;
         val circle1= Circle(r)
         val suare1= Square(l)
+        val rectangle1=Rectangle(4.0,5.0)
         Log.d("mylog","Hello Kotlin!")
       
         Log.d("mylog","circle1 area="+circle1.calcArea().toString())
         Log.d("mylog","suare1 area="+suare1.calcArea().toString())
+        Log.d("mylog","rectangle1 area="+rectangle1.calcArea().toString())
+
 
     }
 }
