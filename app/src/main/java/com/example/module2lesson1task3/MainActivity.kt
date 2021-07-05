@@ -17,6 +17,8 @@ package com.example.module2lesson1task3
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +35,17 @@ class MainActivity : AppCompatActivity() {
         Log.d("mylog","circle1 area="+circle1.calcArea().toString())
         Log.d("mylog","suare1 area="+suare1.calcArea().toString())
         Log.d("mylog","rectangle1 area="+rectangle1.calcArea().toString())
+
+// get reference to ImageView
+        val ivCircle = findViewById(R.id.ivCircle) as ImageView
+        val ivRectangle = findViewById(R.id.ivRectangle) as ImageView
+        val ivSquare = findViewById(R.id.ivSquare)as ImageView
+// set on-click listener for ImageView
+        ivCircle.setOnClickListener {
+           ivRectangle.setVisibility(View.GONE)
+            ivSquare.setVisibility(View.GONE)
+        }
+
 
 
     }
