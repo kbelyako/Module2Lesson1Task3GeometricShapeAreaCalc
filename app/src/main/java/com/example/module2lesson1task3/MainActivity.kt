@@ -22,7 +22,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresPermission
 import androidx.core.widget.doAfterTextChanged
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
 
         Log.d("mylog","Hello Kotlin!")
-      
+
         Log.d("mylog","circle1 area="+circle1.calcArea().toString())
         Log.d("mylog","suare1 area="+suare1.calcArea().toString())
         Log.d("mylog","rectangle1 area="+rectangle1.calcArea().toString())
@@ -51,7 +50,9 @@ class MainActivity : AppCompatActivity() {
         val ivCircle = findViewById(R.id.ivCircle) as ImageView
         val ivRectangle = findViewById(R.id.ivRectangle) as ImageView
         val ivSquare = findViewById(R.id.ivSquare)as ImageView
-        val calculate = findViewById(R.id.btCalc)as Button
+        val btCalculate = findViewById(R.id.btCalc)as Button
+        val btSelectAnotherShape = findViewById(R.id.btSelect)as Button
+
 
         var etShapeParam1 = findViewById(R.id.etShapeParam1) as EditText
         var etShapeParam2 = findViewById(R.id.etShapeParam2) as EditText
@@ -61,7 +62,21 @@ class MainActivity : AppCompatActivity() {
         var tvHeader = findViewById(R.id.tvHeader) as TextView
 
         var tvResult = findViewById(R.id.tvResult) as TextView
-// set on-click listener for ImageView
+
+        fun hideHeaderAndResult(){
+            tvHeader.setVisibility(View.INVISIBLE)
+            tvResult.setVisibility(View.INVISIBLE)
+        }
+
+        fun hideFields(){
+            tvShapeParam1.setVisibility(View.INVISIBLE)
+            etShapeParam1.setVisibility(View.INVISIBLE)
+            tvShapeParam2.setVisibility(View.INVISIBLE)
+            etShapeParam2.setVisibility(View.INVISIBLE)
+            btCalculate.setVisibility(View.INVISIBLE)
+            btSelectAnotherShape.setVisibility(View.INVISIBLE)
+        }
+// set on-click listener for Circle
         ivCircle.setOnClickListener {
             ivRectangle.setVisibility(View.INVISIBLE)
             ivSquare.setVisibility(View.INVISIBLE)
@@ -71,10 +86,8 @@ class MainActivity : AppCompatActivity() {
             etShapeParam1.setVisibility(View.VISIBLE)
             etShapeParam2.setVisibility(View.INVISIBLE)
             tvShapeParam2.setVisibility(View.INVISIBLE)
-            tvHeader.setVisibility(View.INVISIBLE)
-
+            hideHeaderAndResult()
             etShapeParam1.getText().clear()
-
         }
 
         ivSquare.setOnClickListener {
@@ -86,11 +99,8 @@ class MainActivity : AppCompatActivity() {
             shapeType="square"
             tvShapeParam1.setVisibility(View.VISIBLE)
             etShapeParam1.setVisibility(View.VISIBLE)
-            tvHeader.setVisibility(View.INVISIBLE)
-
+            hideHeaderAndResult()
             etShapeParam1.getText().clear()
-
-
         }
 
         ivRectangle.setOnClickListener {
@@ -104,27 +114,26 @@ class MainActivity : AppCompatActivity() {
             etShapeParam2.setVisibility(View.VISIBLE)
             etShapeParam1.getText().clear()
             etShapeParam2.getText().clear()
-            tvHeader.setVisibility(View.INVISIBLE)
-
             shapeType="rectangle"
-
+            hideHeaderAndResult()
         }
 
         etShapeParam1.doAfterTextChanged{
             if(etShapeParam1.getText().length>0)
-                calculate.setVisibility(View.VISIBLE)
+                btCalculate.setVisibility(View.VISIBLE)
         }
 
         etShapeParam2.doAfterTextChanged{
             if(etShapeParam1.getText().length>0)
-                calculate.setVisibility(View.VISIBLE)
+                btCalculate.setVisibility(View.VISIBLE)
         }
 
-        calculate.setOnClickListener {
+        btCalculate.setOnClickListener {
             Log.d("mylog","pushed="+etShapeParam1.text)
-           // val r=et.text.toString().toDouble()
-          //  val square1= Square(etShapeParam1.text.toString().toDouble())
-         //  Log.d("mylog","pushed="+square1.calcArea().toString())
+            // val r=et.text.toString().toDouble()
+            //  val square1= Square(etShapeParam1.text.toString().toDouble())
+            //  Log.d("mylog","pushed="+square1.calcArea().toString())
+            tvResult.setVisibility(View.VISIBLE)
             if (shapeType=="square") {
                 square11=Square(etShapeParam1.text.toString().toDouble())
                 tvResult.text="area of square="+square11.calcArea().toString()
@@ -140,20 +149,21 @@ class MainActivity : AppCompatActivity() {
                 tvResult.text="area of rectangle="+rectangle11.calcArea().toString()
             }
 
+            btSelectAnotherShape.setVisibility(View.VISIBLE)
+        }
+
+        btSelectAnotherShape.setOnClickListener {
             ivRectangle.setVisibility(View.VISIBLE)
             ivSquare.setVisibility(View.VISIBLE)
             ivCircle.setVisibility(View.VISIBLE)
             tvHeader.setVisibility(View.VISIBLE)
 
+            tvResult.setVisibility(View.INVISIBLE)
 
-            tvShapeParam1.setVisibility(View.INVISIBLE)
-            etShapeParam1.setVisibility(View.INVISIBLE)
-
-            tvShapeParam2.setVisibility(View.INVISIBLE)
-            etShapeParam2.setVisibility(View.INVISIBLE)
-            calculate.setVisibility(View.INVISIBLE)
+            hideFields()
 
         }
+
 
 
 
